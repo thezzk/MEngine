@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/E:/MEngine/MEngineDwind/public_html/index.html</file>
+            <file>file:/E:/MEngine/MEngineDwind/public_html/src/GLSLShaders/SimpleVS.glsl</file>
+            <file>file:/E:/MEngine/MEngineDwind/public_html/src/Engine/Core/Engine_GameLoop.js</file>
+            <file>file:/E:/MEngine/MEngineDwind/public_html/src/Engine/Camera.js</file>
+            <file>file:/E:/MEngine/MEngineDwind/public_html/src/Engine/SimpleShader.js</file>
+            <file>file:/E:/MEngine/MEngineDwind/public_html/src/MyGame/MyGame.js</file>
+            <file>file:/E:/MEngine/MEngineDwind/public_html/src/Engine/Renderable.js</file>
+            <file>file:/E:/MEngine/MEngineDwind/public_html/src/Engine/Transform.js</file>
+        </group>
+    </open-files>
+</project-private>
