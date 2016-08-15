@@ -23,26 +23,48 @@ Transform.prototype.getHeight = function() {return this.mScale[1];};
 
 //Rotation getters and setters
 Transform.prototype.setRotationInRad = function(rotationInRadians) {
-  this.mRotationInRad = rotationInRadians;
-  while (this.mRotationInRad > (2*Math.PI))
-      this.mRotationInRad -= (2*Math.PI);
+    this.mRotationInRad = rotationInRadians;
+    while (this.mRotationInRad > (2*Math.PI))
+        this.mRotationInRad -= (2*Math.PI);
+    while (this.mRotationInRad < -(2*Math.PI))
+        this.mRotationInRad += (2*Math.PI);
 };
 Transform.prototype.setRotationInDegree = function(rotationInDegree) {
     this.setRotationInRad(rotationInDegree * Math.PI/180.0);
 };
 
 Transform.prototype.getRotationInRad = function() {return this.mRotationInRad;};
-
+Transform.prototype.getRotationInDegree = function() {return this.mRotationInRad * 180/Math.PI;};
 
 Transform.prototype.getXform = function() {
-  //Create a blank idetity matrix
-  var matrix = mat4.create();
+    //Create a blank idetity matrix
+    var matrix = mat4.create();
   
-  //Step 1: compute translation, for now z is always at 0.0
-  mat4.translate(matrix, matrix, vec3.fromValues(this.getXPos(), this.getYPos(), 0.0));
-  //Step 2: concatenate with rotation.
-  mat4.rotateZ(matrix, matrix, this.getRotationInRad());
-  //Step 3: concatenate with scaling.
-  mat4.scale(matrix, matrix, vec3.fromValues(this.getWidth(), this.getHeight(), 1.0));
-  return matrix;
+    //Step 1: compute translation, for now z is always at 0.0
+    mat4.translate(matrix, matrix, vec3.fromValues(this.getXPos(), this.getYPos(), 0.0));
+    //Step 2: concatenate with rotation.
+    mat4.rotateZ(matrix, matrix, this.getRotationInRad());
+    //Step 3: concatenate with scaling.
+    mat4.scale(matrix, matrix, vec3.fromValues(this.getWidth(), this.getHeight(), 1.0));
+    return matrix;
 };
+
+Transform.prototype.incXPosBy = function(deltaX) {
+    this.mPosition[0] += deltaX;  
+};
+Transform.prototype.incYPosBy = function(deltaY) {
+    this.mPosition[1] += deltaY;
+};
+Transform.prototype.incSizeBy = function(deltaSize) {
+    this.mScale[0] += deltaSize;
+    this.mScale[1] += deltaSize;
+};
+Transform.prototype.incRotationByDegree = function(deltaDegree) {
+    this.mRotationInRad += deltaDegree*Math.PI/180;
+    this.setRotationInRad(this.mRotationInRad);
+};
+Transform.prototype.incRotationByRad = function(deltaRad) {
+    this.mRotationInRad += deltaRad;
+    this.setRotationInRad(this.mRotationInRad);
+};
+ 
