@@ -3,7 +3,7 @@ function MyGame(htmlCanvasID) {
     this.mWhiteSq = null;
     this.mRedSq = null;
     this.mCamera =null;
-    gEngine.Core.initializeWebGL(htmlCanvasID);
+    gEngine.Core.initializeEngineCore(htmlCanvasID);
     this.initialize();        
 };
 
@@ -31,19 +31,27 @@ MyGame.prototype.initialize = function() {
 };
 
 MyGame.prototype.update = function() {
-    //A
+   
     var whiteXform = this.mWhiteSq.getXform();
     var deltaX = 0.05;
-//    if(whiteXform.getXPos()>30)
-//        whiteXform.setPosition(10, 60);
-//    whiteXform.incXPosBy(deltaX);
-    whiteXform.incRotationByRad(3000);
-    
+    //A
+    if(gEngine.Input.isKeyPressed(gEngine.Input.keys.Right)){
+        if(whiteXform.getXPos() > 30){
+            whiteXform.setPosition(10, 60);
+        }
+        whiteXform.incXPosBy(deltaX);
+    }
     //B
+    if(gEngine.Input.isKeyClicked(gEngine.Input.keys.Up))
+        whiteXform.incRotationByDegree(1);
+    
     var redXform = this.mRedSq.getXform();
-    if(redXform.getWidth() > 5)
-        redXform.setSize(2, 2);
-//    redXform.incSizeBy(0.05);
+    //C
+    if(gEngine.Input.isKeyPressed(gEngine.Input.keys.Down)) {
+        if(redXform.getWidth() > 5)
+            redXform.setSize(2, 2);
+        redXform.incSizeBy(0.05);
+    }
 };
 
 MyGame.prototype.draw = function() {

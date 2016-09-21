@@ -11,7 +11,7 @@ gEngine.Core =(function(){
     
     
     //initialize the WebGL, the vertex buffer and compile the shaders
-    var initializeWebGL = function(htmlCanvasID) {
+    var _initializeWebGL = function(htmlCanvasID) {
         var canvas = document.getElementById(htmlCanvasID);
         //Get the standard or experimental webgl and binds to the Canvas area
         //store the result to the instance variable mGL
@@ -19,11 +19,15 @@ gEngine.Core =(function(){
         
         if(mGL === null) {
             document.write("<br><b>WebGL is not supported!</b>");
-            return;
         }
         
-        //now initialize the VertexBuffer
+    };
+    
+    //initialize all of the EngineCore components
+    var initializeEngineCore = function(htmlCanvasID) {
+        _initializeWebGL(htmlCanvasID);
         gEngine.VertexBuffer.initialize();
+        gEngine.Input.initialize();
     };
     
     //Clears the draw area
@@ -35,7 +39,7 @@ gEngine.Core =(function(){
     //Contains the functions and variables that will be accessible.
     var mPublic = {
         getGL: getGL,
-        initializeWebGL: initializeWebGL,
+        initializeEngineCore: initializeEngineCore,
         clearCanvas: clearCanvas
     };
     return mPublic;
