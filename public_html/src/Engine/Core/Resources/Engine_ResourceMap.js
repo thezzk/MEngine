@@ -36,7 +36,7 @@ gEngine.ResourceMap = (function(){
             alter("gEngine.asyncLoadComplete: [" + rName + "] not in map!");
         mResourceMap[rName].mAsset = loadedAsset;
         --mNumOutstandingLoads;
-        _checkForAllCompleted();
+        _checkForAllLoadCompleted();
     };
     var isAssetLoaded = function(rName) {
         return (rName in mResourceMap);

@@ -9,7 +9,7 @@ function SimpleShader(vertexShaderID, fragmentShaderID) {
     
     //start of constructor code
     //
-    //Step A: load and compile vertex and fragment shaders
+    //Step A: Access the shader textfile
     var vertexShader = this._compileShader(vertexShaderID, gl.VERTEX_SHADER);
     var fragmentShader = this._compileShader(fragmentShaderID,gl.FRAGMENT_SHADER);
     
@@ -43,9 +43,8 @@ function SimpleShader(vertexShaderID, fragmentShaderID) {
 //Returns a compiled shader from a shader in the dom.
 //The id is the id of the script in the html tag.
 SimpleShader.prototype._compileShader = function(filePath, shaderType) {
-  var xmlReq, shaderSource, compiledShader;
   var gl = gEngine.Core.getGL();
-  
+  var shaderSource = null, compiledShader = null;
   //Step A:  Get the shader source from file
   shaderSource = gEngine.ResourceMap.retrieveAsset(filePath);
   //Step B: Create the shader based on the shader type: vertex or fragment

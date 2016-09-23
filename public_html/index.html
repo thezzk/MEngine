@@ -2,7 +2,9 @@
     <head>
         <title> D</title>
     </head>
-    <body onload="new MyGame('GLCanvas');">
+    <body onload="var myGame = new MyGame();
+        gEngine.Core.initializeEngineCore('GLCanvas',myGame);
+          ">
         <canvas id="GLCanvas" width="640" height="480">
             Your browser does not support the HTML5 canvas.
         </canvas>

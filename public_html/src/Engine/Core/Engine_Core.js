@@ -24,10 +24,18 @@ gEngine.Core =(function(){
     };
     
     //initialize all of the EngineCore components
-    var initializeEngineCore = function(htmlCanvasID) {
+    var initializeEngineCore = function(htmlCanvasID, myGame) {
         _initializeWebGL(htmlCanvasID);
         gEngine.VertexBuffer.initialize();
         gEngine.Input.initialize();
+        
+        //Inits DefaultResources, when done, invoke startScene(myGame).
+        gEngine.DefaultResources.initialize(function() {startScene(myGame)});
+    };
+    
+    var startScene = function(myGame) {
+        myGame.initialize.call(myGame);
+        gEngine.GameLoop.start(myGame);
     };
     
     //Clears the draw area
