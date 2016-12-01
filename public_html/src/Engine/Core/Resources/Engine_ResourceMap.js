@@ -45,7 +45,7 @@ gEngine.ResourceMap = (function(){
         var r = null;
         if(rName in mResourceMap)
              r = mResourceMap[rName].mAsset;
-         return r;
+        return r;
     };
     var unloadAsset = function(rName) {
         if(rName in mResourceMap) {
