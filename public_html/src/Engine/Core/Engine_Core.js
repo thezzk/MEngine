@@ -40,15 +40,23 @@ gEngine.Core =(function(){
     
     //Clears the draw area
     var clearCanvas = function(color) {
-      mGL.clearColor(color[0],color[1],color[2],color[3]); //set the color to be cleared
-      mGL.clear(mGL.COLOR_BUFFER_BIT);
+        mGL.clearColor(color[0],color[1],color[2],color[3]); //set the color to be cleared
+        mGL.clear(mGL.COLOR_BUFFER_BIT);
+    };
+    
+    var inheritPrototype = function(subClass, superClass) {
+        var prototype = Object.create(superClass, prototype);
+        prototype.constructor = subClass;
+        subClass.prototype = prototype;
     };
     
     //Contains the functions and variables that will be accessible.
     var mPublic = {
         getGL: getGL,
         initializeEngineCore: initializeEngineCore,
-        clearCanvas: clearCanvas
+        clearCanvas: clearCanvas,
+        inheritPrototype: inheritPrototype,
+        startScene: startScene
     };
     return mPublic;
 }());

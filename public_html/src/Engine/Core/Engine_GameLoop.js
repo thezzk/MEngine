@@ -40,7 +40,10 @@ gEngine.GameLoop = (function(){
             //Step D: now let's draw
             this.draw();    //Call MyGame.draw()
         }
-       
+        else {
+            //the game loop has supported, unload current scene!
+            mMyGame.unloadScene();
+        }
     };
     var _startLoop = function() {    
         //Step A: reset frame time
@@ -61,9 +64,12 @@ gEngine.GameLoop = (function(){
                     _startLoop();
                 });
     };
-    
+    var stop = function() {
+        mIsLoopRunning = false;
+    };
     var mPublic = { 
-        start : start
+        start: start,
+        stop: stop
     };
     return mPublic;
 }());

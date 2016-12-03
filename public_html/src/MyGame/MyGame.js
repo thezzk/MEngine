@@ -7,7 +7,7 @@ function MyGame() {
     //The camera to view the scene
     this.mCamera = null;
 };
-
+gEngine.Core.inheritPrototype(MyGame, Scene);
 MyGame.prototype.initialize = function() {
     var sceneParser = new SceneFileParser(this.kSceneFile);
     //A
@@ -24,7 +24,7 @@ MyGame.prototype.update = function() {
     //A
     if(gEngine.Input.isKeyPressed(gEngine.Input.keys.Right)){
         if(whiteXform.getXPos() > 30){
-            whiteXform.setPosition(10, 60);
+            gEngine.GameLoop.stop();
         }
         whiteXform.incXPosBy(deltaX);
     }
@@ -54,5 +54,6 @@ MyGame.prototype.loadScene = function() {
 };
 
 MyGame.prototype.unloadScene = function() {
-    gEngine.TextFileLoader.unloadTextFile(this.kSceneFile);
+    var nextLevel = new BlueLevel(); //next level to be loaded
+    gEngine.Core.startScene(nextLevel);
 };
