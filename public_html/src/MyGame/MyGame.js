@@ -6,6 +6,9 @@ function MyGame() {
     
     //The camera to view the scene
     this.mCamera = null;
+    //Sounds
+    this.kBgClip = "assets/sounds/BGClip.mp3";
+    this.kCue = "assets/sounds/MyGame_cue.wav";
 };
 gEngine.Core.inheritPrototype(MyGame, Scene);
 MyGame.prototype.initialize = function() {
@@ -15,6 +18,7 @@ MyGame.prototype.initialize = function() {
     //B
     sceneParser.parseSquares(this.mSqSet);
     
+    gEngine.AudioClips.playBackgroundAudio(this.kBgClip);
 };
 
 MyGame.prototype.update = function() {
@@ -23,6 +27,7 @@ MyGame.prototype.update = function() {
     var deltaX = 0.05;
     //A
     if(gEngine.Input.isKeyPressed(gEngine.Input.keys.Right)){
+        gEngine.AudioClips.playACue(this.kCue);
         if(whiteXform.getXPos() > 30){
             gEngine.GameLoop.stop();
         }
@@ -51,9 +56,20 @@ MyGame.prototype.draw = function() {
 
 MyGame.prototype.loadScene = function() {
     gEngine.TextFileLoader.loadTextFile(this.kSceneFile, gEngine.TextFileLoader.eTextFileType.eXMLFile);
+    gEngine.AudioClips.loadAudio(this.kBgClip);
+    gEngine.AudioClips.loadAudio(this.kCue);
 };
 
 MyGame.prototype.unloadScene = function() {
+    // stop the background audio before unloading it
+    gEngine.AudioClips.stopBackgroundAudio();
+    //unloaded the scene resources
+    //gEngine.AudioClips.unloadAudio(this.kBgClip);
+    //  The above line is commented out on purpose because
+    //  you know this clip will be used elsewhere in the game
+    //  so you decide to not unload thi clip
+    gEngine.AudioClips.unloadAudio(this.kCue);
+    
     var nextLevel = new BlueLevel(); //next level to be loaded
     gEngine.Core.startScene(nextLevel);
 };

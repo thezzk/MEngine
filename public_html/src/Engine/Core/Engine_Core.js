@@ -31,6 +31,7 @@ gEngine.Core =(function(){
         
         //Inits DefaultResources, when done, invoke startScene(myGame).
         gEngine.DefaultResources.initialize(function() {startScene(myGame)});
+        gEngine.AudioClips.initAudioContext();
     };
     
     var startScene = function(myGame) {
